@@ -8,6 +8,13 @@ const app = express();
 const port = 3000;
 
 app.use(express.urlencoded({ extended: true }));
+
+// Logging middleware
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url} - ${new Date().toISOString()}`);
+  next();
+});
+
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
